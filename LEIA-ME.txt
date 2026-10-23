@@ -1,0 +1,16 @@
+ATLAS GESTÃO – site completo (sem servidor)
+
+ARQUIVOS: index.html, style.css, app.js  (mantenha os três na mesma pasta)
+
+USAR: abra o index.html no navegador, ou envie a pasta para Netlify, GitHub Pages ou qualquer hospedagem de arquivos.
+
+RECURSOS: cadastro e login por empresa (CNPJ validado, senha com PBKDF2), visão geral com vencimentos,
+despesas, documentos, funcionários e notas fiscais com adicionar/editar/remover, marcar como pago, busca,
+e backup (exportar/importar).
+
+DADOS: ficam no navegador (localStorage), só naquele computador. Limpar os dados do navegador apaga tudo.
+Use "Baixar backup" com frequência. Não é indicado para dados sensíveis: sem servidor não há proteção real.
+
+ARQUIVOS ANEXADOS: exames e documentos (PDF, imagens, Word, Excel etc., até 15 MB cada) ficam guardados no navegador
+(IndexedDB), junto do registro (nome, tamanho, data e hora da importação). A "Visão geral" lista as últimas importações.
+O "Baixar backup" salva só os dados cadastrados, NÃO os arquivos anexados; baixe os arquivos importantes pelo botão "Baixar".

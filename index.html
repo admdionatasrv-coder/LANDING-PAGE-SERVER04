@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'none'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATLAS GESTÃO – Gestão empresarial</title>
+<meta name="description" content="Despesas, documentos, funcionários, notas fiscais e controles bancários em uma área exclusiva para cada empresa.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="landing">
+  <header class="hero">
+    <nav class="nav">
+      <div class="logo" style="display:flex"><span class="brandmark">A</span><span>ATLAS GESTÃO<small>GESTÃO EMPRESARIAL</small></span></div>
+      <div><button class="btn ghost" data-auth="login">Entrar</button><button class="btn" data-auth="register">Cadastrar empresa</button></div>
+    </nav>
+    <div class="hero-body">
+      <h1>Cada empresa com a sua área exclusiva.</h1>
+      <p>Centralize despesas, documentos, funcionários, notas fiscais e controles bancários em um ambiente organizado por CNPJ.</p>
+      <div class="actions"><button class="btn" data-auth="register">Criar acesso da empresa</button><button class="btn ghost" data-auth="login">Já tenho conta</button></div>
+    </div>
+  </header>
+  <section class="features">
+    <div><h3>Despesas</h3><p>Registre e acompanhe os gastos da empresa com valores e vencimentos.</p></div>
+    <div><h3>Documentos</h3><p>Contratos, certidões e licenças reunidos e organizados por empresa.</p></div>
+    <div><h3>Funcionários</h3><p>Cadastro de equipe, cargos e salários em um só lugar.</p></div>
+    <div><h3>Notas fiscais</h3><p>Controle de notas emitidas e recebidas, com status de pagamento.</p></div>
+  </section>
+  <footer>ATLAS GESTÃO · Gestão empresarial</footer>
+</div>
+
+<div class="authscreen" id="authScreen" role="dialog" aria-modal="true" aria-label="Acesso">
+  <section class="authbrand">
+    <div class="logo"><span class="brandmark">A</span><span>ATLAS GESTÃO<small>GESTÃO EMPRESARIAL</small></span></div>
+    <div class="authpitch"><h2>Uma área exclusiva para cada empresa.</h2><p>Acesso individual por conta empresarial, com dados organizados por CNPJ e acompanhamento de vencimentos e pendências.</p></div>
+    <div class="authlegal">Dados protegidos por conta empresarial.</div>
+  </section>
+  <section class="authpanel">
+    <button class="close" id="closeAuth" type="button">Fechar</button>
+    <div class="authbox">
+      <div class="authswitch"><button type="button" id="loginTab" class="active">Entrar</button><button type="button" id="registerTab">Cadastrar empresa</button></div>
+      <div id="authMessage" class="authmessage" role="alert"></div>
+      <div id="loginView">
+        <h3>Bem-vindo de volta</h3><p class="authdesc">Entre com os dados de acesso da sua empresa.</p>
+        <form class="authform" id="loginForm">
+          <div><label for="loginEmail">E-mail de acesso</label><input id="loginEmail" type="email" required autocomplete="username" placeholder="voce@empresa.com.br"></div>
+          <div><label for="loginPassword">Senha</label><input id="loginPassword" type="password" required autocomplete="current-password"></div>
+          <button class="btn" type="submit">Entrar no painel</button>
+        </form>
+      </div>
+      <div id="registerView" style="display:none">
+        <h3>Cadastre sua empresa</h3><p class="authdesc">Crie o acesso da sua empresa, vinculado ao CNPJ.</p>
+        <form class="authform" id="registerForm">
+          <div><label for="regCompany">Razão social / nome da empresa</label><input id="regCompany" required autocomplete="organization"></div>
+          <div><label for="regCnpj">CNPJ</label><input id="regCnpj" required inputmode="numeric" placeholder="00.000.000/0000-00"></div>
+          <div><label for="regEmail">E-mail de acesso</label><input id="regEmail" type="email" required autocomplete="email"></div>
+          <div><label for="regPassword">Senha (mínimo 8 caracteres)</label><input id="regPassword" type="password" required minlength="8" autocomplete="new-password"></div>
+          <div><label for="regConfirm">Confirmar senha</label><input id="regConfirm" type="password" required minlength="8" autocomplete="new-password"></div>
+          <button class="btn" type="submit">Criar acesso da empresa</button>
+        </form>
+      </div>
+      <div class="authfoot">Os dados ficam salvos neste navegador, neste computador. Use "Baixar backup" para guardar uma cópia.</div>
+    </div>
+  </section>
+</div>
+
+<div class="app" id="mainApp">
+  <aside class="side">
+    <div class="logo"><span class="brandmark">A</span><span>ATLAS</span></div>
+    <button class="active" data-mod="geral">Visão geral</button>
+    <button data-mod="despesas">Despesas</button>
+    <button data-mod="documentos">Documentos</button>
+    <button data-mod="funcionarios">Funcionários</button>
+    <button data-mod="funcdocs">Docs. de funcionários</button>
+    <button data-mod="notas">Notas fiscais</button>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <h2 id="modTitle">Visão geral</h2>
+      <div class="who"><div><strong id="activeCompanyName"></strong><span id="activeCompanyCnpj"></span></div><button id="importBtn" type="button">Importar backup</button><input type="file" id="importFile" accept="application/json,.json" hidden><button id="backupBtn" type="button">Baixar backup</button><button id="logoutBtn" type="button">Sair</button></div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="panel">
+      <div class="add" id="searchRow"><input id="search" type="search" placeholder="Buscar nesta lista..." aria-label="Buscar"></div>
+      <form class="add" id="addForm"></form>
+      <div class="tablewrap" id="tableBox"></div>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
